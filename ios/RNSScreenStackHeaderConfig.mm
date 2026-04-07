@@ -926,7 +926,10 @@ RNS_IGNORE_SUPER_CALL_BEGIN
 {
   if (childComponentView.window != nil) {
     UINavigationItem *navitem = _screenView.controller.navigationItem;
-    UIView *snapshot = [childComponentView snapshotViewAfterScreenUpdates:NO];
+    UIView *snapshot = [childComponentView snapshotViewAfterScreenUpdates:YES];
+    if (snapshot == nil) {
+      snapshot = [childComponentView snapshotViewAfterScreenUpdates:NO];
+    }
 
     // This code should be kept in sync with analogous switch statement in
     // `+ [RNSScreenStackHeaderConfig updateViewController: withConfig: animated:]` method.
