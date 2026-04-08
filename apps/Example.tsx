@@ -4,7 +4,6 @@ import {
   StyleSheet,
   I18nManager,
   Platform,
-  StatusBar,
   useColorScheme,
 } from 'react-native';
 import {
@@ -32,6 +31,7 @@ import Orientation from './src/screens/Orientation';
 import SearchBar from './src/screens/SearchBar';
 import Events from './src/screens/Events';
 import Gestures from './src/screens/Gestures';
+import UnstableHeaderRightItems from './src/screens/UnstableHeaderRightItems';
 
 import { enableFreeze } from 'react-native-screens';
 import { GestureDetectorProvider } from 'react-native-screens/gesture-handler';
@@ -116,6 +116,11 @@ const SCREENS: Record<
     title: 'Gestures',
     component: Gestures,
     type: 'playground',
+  },
+  UnstableHeaderRightItems: {
+    title: 'Header right items repro',
+    component: UnstableHeaderRightItems,
+    type: 'example',
   },
 };
 
