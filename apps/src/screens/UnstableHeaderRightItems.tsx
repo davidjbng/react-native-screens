@@ -21,48 +21,50 @@ interface BottomSheetScreenProps {
 
 const MainScreen = ({ navigation }: MainScreenProps): React.JSX.Element => {
   useLayoutEffect(() => {
-    navigation.setOptions(
-      {
-        title: 'Header right items',
-        unstable_headerRightItems: () => [
-          {
-            type: 'menu',
-            label: 'More',
-            icon: {
-              type: 'sfSymbol',
-              name: 'ellipsis.circle',
-            },
-            menu: {
-              title: 'Header menu repro',
-              items: [
-                {
-                  type: 'action',
-                  label: 'Open form sheet',
-                  onPress: () => navigation.navigate('BottomSheet'),
-                },
-                {
-                  type: 'action',
-                  label: 'Archive',
-                  onPress: () => Alert.alert('Archive pressed'),
-                },
-                {
-                  type: 'action',
-                  label: 'Mute',
-                  onPress: () => Alert.alert('Mute pressed'),
-                },
-              ],
-            },
+    const options: Parameters<typeof navigation.setOptions>[0] & {
+      unstable_headerRightItems: () => unknown[];
+    } = {
+      title: 'Header right items',
+      unstable_headerRightItems: () => [
+        {
+          type: 'menu',
+          label: 'More',
+          icon: {
+            type: 'sfSymbol',
+            name: 'ellipsis.circle',
           },
-        ],
-      } as never,
-    );
+          menu: {
+            title: 'Header menu repro',
+            items: [
+              {
+                type: 'action',
+                label: 'Open form sheet',
+                onPress: () => navigation.navigate('BottomSheet'),
+              },
+              {
+                type: 'action',
+                label: 'Archive',
+                onPress: () => Alert.alert('Archive pressed'),
+              },
+              {
+                type: 'action',
+                label: 'Mute',
+                onPress: () => Alert.alert('Mute pressed'),
+              },
+            ],
+          },
+        },
+      ],
+    };
+
+    navigation.setOptions(options);
   }, [navigation]);
 
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>unstable_headerRightItems repro</Text>
       <Text style={styles.text}>1. Open the header menu in the top-right corner.</Text>
-      <Text style={styles.text}>2. Tap &quot;Open form sheet&quot;.</Text>
+      <Text style={styles.text}>2. Tap "Open form sheet".</Text>
       <Text style={styles.text}>3. Close the sheet and open the header menu again.</Text>
       <Text style={styles.text}>
         4. None of the menu actions define a selected state, so any checkmark
