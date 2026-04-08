@@ -19,10 +19,29 @@ interface BottomSheetScreenProps {
   navigation: NativeStackNavigationProp<StackParamList, 'BottomSheet'>;
 }
 
+type HeaderMenuAction = {
+  type: 'action';
+  label: string;
+  onPress: () => void;
+};
+
+type HeaderMenuItem = {
+  type: 'menu';
+  label: string;
+  icon: {
+    type: 'sfSymbol';
+    name: string;
+  };
+  menu: {
+    title: string;
+    items: HeaderMenuAction[];
+  };
+};
+
 const MainScreen = ({ navigation }: MainScreenProps): React.JSX.Element => {
   useLayoutEffect(() => {
     const options: Parameters<typeof navigation.setOptions>[0] & {
-      unstable_headerRightItems: () => unknown[];
+      unstable_headerRightItems: () => HeaderMenuItem[];
     } = {
       title: 'Header right items',
       unstable_headerRightItems: () => [
